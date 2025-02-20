@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html
+﻿
+
+<!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,11 +38,14 @@
 			<div class="hal" id="main">
 				<div>
 
-					<span style="width:18%; display:inline-block;">
+					<div style="width:75%; display:inline-block;">
+						<marquee>
+							請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地!詳見最新文章
+						</marquee>
+					</div>
+					<span style="width:23%; display:inline-block;">
 						<a href="?do=login">會員登入</a>
 					</span>
-					<div class="">
-					</div>
 				</div>
 				<?php
 $do=$_GET['do']??'main';
