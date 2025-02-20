@@ -1,10 +1,10 @@
 <?php
-data_default_timezone_set('Asia/Taipei');
+date_default_timezone_set('Asia/Taipei');
 session_start();
 
 
 class DB{
-protected $dsn="mysql:host=location;charset=utf8;dbname=db01";
+protected $dsn="mysql:host=location;charset=utf8;dbname=db22";
 protected $pdo;
 protected $table;
 
@@ -107,7 +107,26 @@ function count(...$array){
 
 
 
-function math(){}
+
+function sum($col,$where=[]){
+    return $this->math('sum',$col,$where);
+}
+
+
+
+protected function math($math,$col='id',$where=[]){
+    $sql="SELECT $math($col) FROM $this->table";
+
+    if(!empty($where)){
+        $tmp=$this->a2s($where);
+        $sql=$sql . " WHERE " . join(" && ", $tmp);
+    }
+
+    return $this->pdo->query($sql)->fetchColumn();
+}
+
+
+
 
 
 
@@ -130,13 +149,24 @@ function fetch_all($sql){
 
 
 
+
 }
+
+
+
+
+
+
+
+
+
+
 function to($url){ 
     header("location:" .$url);
 } 
 
 function q($sql){
-$dsn="mysql:host=location;charset=utf8;dbname=db01";
+$dsn="mysql:host=location;charset=utf8;dbname=db22";
 $pdo=new PDO($dsn ,'root','');
 return $pdo->query($sql)->fetchAll();
 
@@ -147,4 +177,18 @@ function dd($array){
 echo "<pre>";
 print_r($array);
 echo "</pre>";
+}
+
+$Total=new DB('total');
+
+if(!isset($_SESSION['view'])){
+    if($Total->count(['date'=>date("Y-m-d")])>0){
+        $total =$Total->find(['date'=>date("Y-m-d")]);
+        $total['total']++;
+        $Total->save($total);
+    }else{
+        $Total->save(['date'=>date("Y-m-d"),'total'=>1]);
+    
+    }
+    $_SESSION['view']=1;
 }
