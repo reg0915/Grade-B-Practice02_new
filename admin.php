@@ -47,8 +47,14 @@
                         </marquee>
                     </div>
                     <span style="width:23%; display:inline-block;">
-                        <a href="?do=login">會員登入</a>
-                    </span>
+						<?php if(!isset($_SESSION['user'])):?>
+						<a href="?do=login">會員登入</a>
+						<?php else:?>
+						歡迎,<?=$_SESSION['user'];?><br>
+						<button onclick="location.href='admin.php'">管理</button>｜
+						<button onclick="logout()">登出</button>
+						<?php endif;?> 
+						</span>
                 </div>
                 <?php
                  $do=$_GET['do']??'main';
@@ -68,6 +74,24 @@
             服務信箱：health@test.labor.gov.tw<img src="./icon/02B02.jpg" width="45">
         </div>
     </div>
+
+
+    
+	<script>
+
+
+function logout()
+{
+	$.get("api/logout.php",function(){
+
+
+		location.href='index.php'
+    // location.reload()
+
+	})
+
+}
+	</script>
 
 </body>
 
