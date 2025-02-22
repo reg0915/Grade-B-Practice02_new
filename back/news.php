@@ -3,7 +3,7 @@
 
     <legend>最新文章管理</legend>
 
-
+    <form method="post" action="./api/edit_news.php">
     <table class="ct" style="width:100%">
         <tr>
             <th>編號</th>
@@ -61,6 +61,22 @@ for($i=1;$i<=$pages;$i++){
 
 <div class="ct">
 
-    <button onclick="edit()">確定修改</button>
+    <button type="submit">確定修改</button>
 </div>
+
+</form>
 </fieldset>
+<!-- 
+<script>
+
+function edit(){
+let ids=$("input[name='id[]']").map((idx,item)=>{return $(item).val()}).get();
+console.log(ids);
+
+}
+
+
+
+
+
+</script> -->
