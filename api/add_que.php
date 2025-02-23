@@ -15,4 +15,4 @@ echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-// to("../admin.php?do=que");
+to("../admin.php?do=que");
