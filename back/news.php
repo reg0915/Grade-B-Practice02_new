@@ -12,6 +12,7 @@
             <th>刪除</th>
         </tr>
         <?php
+        // 分頁
 $total=$News->count();
 $div=3;
 $pages=ceil($total/$div);
