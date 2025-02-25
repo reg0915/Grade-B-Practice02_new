@@ -68,7 +68,7 @@ $(".like").on("click", function() {
 
     $.post("./api/like.php", {
         id
-    }.() => {
+    }, () => {
 
 
 
