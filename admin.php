@@ -20,7 +20,7 @@
         <pre id="ssaa"></pre>
     </div>
     <div id="all">
-	<div id="title">
+        <div id="title">
             <?=date("m 月 d 號 l");?> | 今日瀏覽: <?=$Total->find(['date'=>date("Y-m-d")])['total'];?>
             | 累積瀏覽: <?=$Total->sum('total');?>
             <a href="index.php" style="float:right">回首頁</a>
@@ -47,14 +47,16 @@
                         </marquee>
                     </div>
                     <span style="width:23%; display:inline-block;">
-						<?php if(!isset($_SESSION['user'])):?>
-						<a href="index.php?do=login">會員登入</a>
-						<?php else:?>
-						歡迎,<?=$_SESSION['user'];?><br>
-						<button onclick="location.href='admin.php'">管理</button>｜
-						<button onclick="logout()">登出</button>
-						<?php endif;?> 
-						</span>
+                        <?php if (! isset($_SESSION['user'])): ?>
+                        <a href="index.php?do=login">會員登入</a>
+                        <?php else: ?>
+                        歡迎,<?php echo $_SESSION['user']; ?>
+                        <?php if ($_SESSION['user'] == 'admin'): ?>
+                        <br><button onclick="location.href='admin.php'">管理</button>｜
+                        <?php endif; ?>
+                        <button onclick="logout()">登出</button>
+                        <?php endif; ?>
+                    </span>
                 </div>
                 <?php
                  $do=$_GET['do']??'main';
@@ -76,22 +78,19 @@
     </div>
 
 
-    
-	<script>
+
+    <script>
+    function logout() {
+        $.get("api/logout.php", function() {
 
 
-function logout()
-{
-	$.get("api/logout.php",function(){
+            location.href = 'index.php'
+            // location.reload()
 
+        })
 
-		location.href='index.php'
-    // location.reload()
-
-	})
-
-}
-	</script>
+    }
+    </script>
 
 </body>
 
