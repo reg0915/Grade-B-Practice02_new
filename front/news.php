@@ -25,7 +25,9 @@
             <td>
                 <?php
                     if (isset($_SESSION['user'])) {
-                        echo "<a href='#' data-id='{$row['id']}' class='like'  >讚</a>";
+                        $chk  = $Log->count(['news' => $row['id'], 'user' => $_SESSION['user']]);
+                        $like = ($chk > 0) ? "收回讚" : "讚";
+                        echo "<a href='#' data-id='{$row['id']}' class='like'  > $like</a>";
                     }
                 ?>
 
@@ -60,18 +62,9 @@
 $(".like").on("click", function() {
     let id = $(this).data('id');
     let like = $(this).text();
-
-
-
-
-
-
     $.post("./api/like.php", {
         id
     }, () => {
-
-
-
         switch (like) {
             case "讚":
                 $(this).text('收回讚');
@@ -80,9 +73,6 @@ $(".like").on("click", function() {
             case "收回讚":
                 $(this).text('讚');
                 break;
-
-
-
         }
 
     })
