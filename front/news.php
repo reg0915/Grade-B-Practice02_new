@@ -27,7 +27,7 @@
                     if (isset($_SESSION['user'])) {
                         $chk  = $Log->count(['news' => $row['id'], 'user' => $_SESSION['user']]);
                         $like = ($chk > 0) ? "收回讚" : "讚";
-                        echo "<a href='#' data-id='{$row['id']}' class='like'  > $like</a>";
+                        echo "<a href='#' data-id='{$row['id']}' class='like'  >$like</a>";
                     }
                 ?>
 

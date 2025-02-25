@@ -22,7 +22,7 @@
     <div id="all">
         <div id="title">
             <?php echo date("m 月 d 號 l"); ?> | 今日瀏覽:<?php echo $Total->find(['date' => date("Y-m-d")])['total']; ?>
-            | 累積瀏覽:<?php echo $Total->sum('total'); ?>
+            | 累積瀏覽:<?php echo qCol("SELECT sum(total) from total "); ?>
             <a href="index.php" style="float:right">回首頁</a>
         </div>
         <div id="title2">
@@ -51,7 +51,7 @@
                         <a href="index.php?do=login">會員登入</a>
                         <?php else: ?>
                         歡迎,<?php echo $_SESSION['user']; ?>
-<?php if ($_SESSION['user'] == 'admin'): ?>
+                        <?php if ($_SESSION['user'] == 'admin'): ?>
                         <br><button onclick="location.href='admin.php'">管理</button>｜
                         <?php endif; ?>
                         <button onclick="logout()">登出</button>
