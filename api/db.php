@@ -8,23 +8,21 @@ class DB
     protected $pdo;
     protected $table;
 
-    public function __construct($table)
-    {
-        $this->table = $table;
-        $this->pdo   = new PDO($this->dsn, 'root', '');
+function __construct($table){
+    $this->table=$table;
+    $this->pdo=new PDO($this->dsn,'root','');
     }
 
-    public function all(...$arg)
-    {
-        $sql = "select * from $this->table ";
-        if (! empty($arg[0]) && is_array($arg[0])) {
-            $tmp = $this->arrayToSQL($arg[0]);
-            $sql .= " where " . join(" && ", $tmp);
-        } else if (isset($arg[0]) && is_string($arg[0])) {
-            $sql .= $arg[0];
+function all(...$arg){
+    $sql="select * from $this->table ";
+    if(!empty($arg[0]) && is_array($arg[0])){
+        $tmp=$this->arrayToSQL($arg[0]);
+        $sql .=" where ".join(" && ",$tmp);
+    }else if(isset($arg[0]) && is_string($arg[0])){
+        $sql .=$arg[0];
         }
 
-        if (! empty($arg[1])) {
+        if (isset($arg[0])&& ! empty($arg[1])) {
             $sql .= $arg[1];
         }
         return $this->fetch_all($sql);
