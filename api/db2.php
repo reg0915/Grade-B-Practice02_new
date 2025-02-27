@@ -49,35 +49,41 @@ return $this->fetch_one($sql);
 }
 
 
-public function save($array){
-if(isset($array['id'])){
-    $id=$array['id'];
-    unset($array['id']);
-$tmp=$this->a2s($array);
-$sql="update $this->table set" . join(",",$tmp) . "where `id`='$id'";
+// public function save($array){
+// if(isset($array['id'])){
+//     $id=$array['id'];
+//     unset($array['id']);
+// $tmp=$this->a2s($array);
+// $sql="update $this->table set" . join(",",$tmp) . "where `id`='$id'";
 
 
-}else{
+// }else{
 
-$keys = join("`,`",array_keys(($array)));
-$values=join("','",$array);
-$sql ="insert into $this->table(`{$keys}`)  values('{$values}')";
+// $keys = join("`,`",array_keys(($array)));
+// $values=join("','",$array);
+// $sql ="INSERT INTO  $this->table(`{$keys}`)  values('{$values}')";
 
 
-}
+// }
 
+//     return $this->pdo->exec($sql);
+// }
+
+
+function save($array){
+    // id: update table set
+    if(isset($array['id'])){
+        $id=$array['id'];
+        unset($array['id']);
+        $where = $this->a2s($array);
+        $sql = "UPDATE $this->table set".join(',',$where)." where `id`='$id' ";
+    }else{
+        // !id: insert into table(`".join("`,`",)."`) values('".join("','",)."')
+        $keys = array_keys($array);
+        $sql = " INSERT INTO $this->table(`".join("`,`",$keys)."`) values('".join("','",$array)."')";
+    }
     return $this->pdo->exec($sql);
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
