@@ -14,7 +14,7 @@ protected $table;
 
 function __construct($table){
     $this->table=$table;
-    $this->pdo=new DB($this->dsn,'root','');
+    $this->pdo=new PDO($this->dsn,'root','');
 }
 
 
@@ -61,7 +61,7 @@ $sql="update $this->table set" . join(",",$tmp) . "where `id`='$id'";
 
 $keys = join("`,`",array_keys(($array)));
 $values=join("','",$array);
-$sql ="insert into $this->table(`{$key}`)  values('{$values}')";
+$sql ="insert into $this->table(`{$keys}`)  values('{$values}')";
 
 
 }
@@ -138,20 +138,20 @@ public function fetch_all($sql){
 }
 
 
-
-
-
-
-
-
-
-
 }
 
 
 
+
+
+
+
+
+
+
+
 // db外
-function to(){
+function to($url){
 header("location:".$url);
 
 }
@@ -173,28 +173,4 @@ function q($sql){
    $dsn="mysql:host=localhost;charset=utf8;dbname=db22";
    $pdo=new PDO($dsn,'root','');
    return $pdo->query($sql)->fetchAll();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
