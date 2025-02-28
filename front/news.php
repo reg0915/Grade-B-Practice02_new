@@ -20,8 +20,11 @@
             foreach ($rows as $row):
         ?>
         <tr>
-            <td class="clo"><?php echo $row['title']; ?></td>
-            <td><?php echo mb_substr($row['news'], 0, 25); ?>...</td>
+            <td class="row-title"><?php echo $row['title']; ?></td>
+            <td>
+                <span class='title'><?=mb_substr($row['news'], 0, 25); ?>...</span>
+                <span class='detail'><?=nl2br($row['news']);?></span>
+            </td>
             <td>
                 <?php
                     if (isset($_SESSION['user'])) {
@@ -77,5 +80,9 @@ $(".like").on("click", function() {
 
     })
 
+    
+})
+$(".row-title").on("click",function(){
+    $(this).next().children(".title,.detail").toggle();
 })
 </script>

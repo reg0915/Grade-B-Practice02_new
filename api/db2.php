@@ -113,7 +113,7 @@ if(empty($arg[1])){
     $sql .=$arg[1];
 }
 
-return $this->pdo->query($sql)->fetchColumn($sql);
+return $this->pdo->query($sql)->fetchColumn();
 }
 
 
