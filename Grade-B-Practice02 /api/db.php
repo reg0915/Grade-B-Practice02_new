@@ -7,6 +7,13 @@ class DB
     protected $dsn = "mysql:host=localhost;charset=utf8;dbname=db22";
     protected $pdo;
     protected $table;
+    public static  $type=[
+       1=> '健康新知',  
+       2=> '菸害防治',
+       3=> '癌症防治',
+       4=> '慢性病防治'
+        
+    ];
 
 function __construct($table){
     $this->table=$table;

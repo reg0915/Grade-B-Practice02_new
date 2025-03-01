@@ -1,3 +1,32 @@
+<style>
+.detail{
+    background:rgba(51,51,51,0.8);
+    color:#FFF; 
+    height:300px;
+    width:400px;
+    position:absolute;
+    display:none; 
+    z-index:9999; 
+    overflow:auto;
+    left:10px;
+    top:10px;
+}
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
 <fieldset>
     <legend> 目前位置：首頁 >人氣文章區 </legend>
 
@@ -20,9 +49,14 @@
             foreach ($rows as $row):
         ?>
         <tr>
-            <td><?= $row['title']; ?></td>
-            <td>
-                <span><?=mb_substr($row['news'], 0, 25); ?>...</span>
+            <td class="row-title"><?= $row['title']; ?></td>
+            <td style="position:relative;" class="row-content">
+            <span class='title'><?=mb_substr($row['news'], 0, 25); ?>...</span>
+                <span class='detail'>
+                <h2 style="color:skyblue"><?=$News::$type[$row['type']];?></h2>
+                    <?=nl2br($row['news']);?>
+                </span>
+
             </td>
             <td>
                 <?php
@@ -81,5 +115,32 @@ $(".like").on("click", function() {
 
     
 })
+$(".row-title").hover(
+function(){
+    $(this).next().children(".detail").show();
+},
+function () {
+    $(this).next().children(".detail").hide();
+    
+}
+
+)
+$(".row-content").hover(
+function(){
+    $(this).children(".detail").show();
+},
+function () {
+    $(this).children(".detail").hide();
+    
+}
+
+)
+
+
+
+
+
+
+
 
 </script>
