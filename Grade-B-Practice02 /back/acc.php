@@ -64,7 +64,7 @@ function del(){
     })
 console.log(ids)
 $.post('./api/del_user.php',{ids},()=>{
-    location.reload();
+    // location.reload();
 })
 
 }
